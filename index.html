@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Techfest 2026 — Beyond the Surface | IIT Bombay</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body style="overflow:hidden;">
+
+  <!-- INTRO OVERLAY -->
+  <div id="intro-overlay">
+    <canvas id="intro-canvas"></canvas>
+    <div class="intro-content">
+      <div class="intro-logo-ring">
+        <div class="intro-ring r1"></div>
+        <div class="intro-ring r2"></div>
+        <div class="intro-ring r3"></div>
+        <div class="intro-core">TF</div>
+      </div>
+      <div class="intro-text">
+        <div class="intro-iit">IIT BOMBAY PRESENTS</div>
+        <div class="intro-title">TECHFEST <span>2026</span></div>
+        <div class="intro-sub">BEYOND THE SURFACE</div>
+      </div>
+      <div class="intro-bar"><div class="intro-bar-fill" id="intro-bar-fill"></div></div>
+      <div class="intro-status" id="intro-status">INITIALISING CORE SYSTEMS...</div>
+    </div>
+  </div>
+
+  <!-- Aurora background -->
+  <div class="aurora-layer"><div class="aurora-wave"></div></div>
+
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-left">
+      <div class="sonar-logo">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(0,200,255,0.9)" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+        </svg>
+      </div>
+      <div class="brand">
+        <span class="brand-name">TECH<em>FEST</em></span>
+        <span class="brand-sub">IIT BOMBAY · 2026</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#hero"      class="active">Dive In</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#workshops">Workshops</a></li>
+      <li><a href="#speakers">Speakers</a></li>
+      <li><a href="#register">Register</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="depth-read" id="depth-read">DEPTH: 0000m</span>
+      <a href="#register" class="nav-cta">DIVE IN</a>
+    </div>
+  </nav>
+
+  <!-- DEPTH GAUGE -->
+  <div class="depth-gauge">
+    <div class="dg-track"><div class="dg-fill" id="dg-fill"></div></div>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero" class="section hero">
+    <div class="hero-inner">
+      <div class="signal-tag"><span class="sig-dot"></span>SIGNAL LIVE · IIT BOMBAY CORE ACTIVE</div>
+      <div class="hero-yr">2 0 2 6</div>
+      <h1 class="hero-h1">BEYOND<br/>THE <em>SURFACE</em></h1>
+      <p class="hero-tagline">T E C H F E S T &nbsp; 2 0 2 6</p>
+      <p class="hero-desc">
+        Asia's largest science and technology festival.<br/>
+        Dive into robotics, AI, aerospace, and deep-tech frontiers.<br/>
+        December 2026 · IIT Bombay Campus, Mumbai.
+      </p>
+      <div class="hero-actions">
+        <a href="#events"   class="btn-primary">EXPLORE THE DEEP</a>
+        <a href="#register" class="btn-ghost">REGISTER NOW</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-l">PRIZE POOL</span><span class="stat-v">₹1 Cr+</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-l">NATIONS</span><span class="stat-v">180+</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-l">PARTICIPANTS</span><span class="stat-v">75,000+</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-l">SINCE</span><span class="stat-v">1998</span></div>
+      </div>
+    </div>
+
+    <!-- DIVE CONTROL HUD -->
+    <div class="hud-panel">
+      <div class="hud-header">
+        <span class="hud-icon">◉</span> DIVE CONTROL HUD
+        <span class="hud-arrow">▾</span>
+      </div>
+      <div class="hud-body">
+        <p class="hud-label">OCEAN ZONE SELECT</p>
+        <div class="hud-tabs">
+          <button class="htab active" onclick="setCore(this,'#00bfff',0x00bfff,'SUNLIT_CURRENTS','CURRENT_STABLE')">SUNLIT</button>
+          <button class="htab"        onclick="setCore(this,'#a855f7',0xa855f7,'TWILIGHT_DRIFT','PRESSURE_STABLE')">TWILIGHT</button>
+          <button class="htab"        onclick="setCore(this,'#10b981',0x10b981,'ABYSSAL_FLUX','BIOLUME_LOCKED')">ABYSSAL</button>
+        </div>
+        <div class="hud-row">
+          <span class="hud-key">ZONE_MODE:</span>
+          <span class="hud-val" id="core-mode">SUNLIT_CURRENTS</span>
+        </div>
+        <div class="hud-metrics">
+          <div class="hud-metric">
+            <span class="hud-mlabel">CURRENT VELOCITY</span>
+            <span class="hud-mval" id="freq-val">3.826 kn</span>
+          </div>
+          <div class="hud-metric">
+            <span class="hud-mlabel">WATER TEMP</span>
+            <span class="hud-mval" id="temp-val">4.2 °C</span>
+          </div>
+        </div>
+        <div class="hud-row"><span class="hud-key">PRESSURE HULL STATUS</span></div>
+        <div class="hud-status-row">
+          <span class="hud-sdot"></span>
+          <span id="node-status-text">CURRENT_STABLE</span>
+        </div>
+        <div class="hud-divider"></div>
+        <div class="hud-row hud-slider-row">
+          <span class="hud-key">⠿ SCROLL DRIFT SPEED:</span>
+          <span class="hud-val" id="speed-out">1.0x</span>
+        </div>
+        <input type="range" id="speed-slider" min="1" max="50" value="10" step="1"
+               oninput="updateSpeed(this.value)"/>
+        <div class="hud-actions">
+          <button class="hud-act">◎ AUTO-DESCEND</button>
+          <button class="hud-act danger">⚠ SURFACE ALERT</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue"><div class="scroll-line"></div><span>DESCEND</span></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section about-section">
+    <div class="sec-inner about-inner">
+      <div class="about-text">
+        <p class="sec-eyebrow reveal">GLOBAL SCIENCE SAGA</p>
+        <h2 class="sec-h2 reveal">ABOUT TECHFEST 2026</h2>
+        <div class="about-line reveal"></div>
+        <p class="about-body reveal">
+          Established in 1998, Techfest IIT Bombay has grown to become Asia's Largest
+          Science and Technology Festival. Hosting a footprint that spreads across dozens
+          of universities, research labs, and private enterprises globally, Techfest
+          represents a platform for the next generation of engineers.
+        </p>
+        <p class="about-body reveal" style="margin-top:1.2rem;opacity:.75;">
+          From breaking the code of high-level secure algorithms to experiencing extreme robotic
+          shockwaves inside our battle-box, Techfest encapsulates a futuristic legacy.
+        </p>
+      </div>
+      <div class="about-geo" id="about-geo-wrap">
+        <canvas id="about-canvas"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events" class="section events-section">
+    <div class="sec-inner">
+      <p class="sec-eyebrow reveal">ZONE_01 // COMPETITIONS</p>
+      <h2 class="sec-h2 reveal">Into the <em>Deep</em></h2>
+      <div class="events-grid">
+        <div class="ev-card reveal" style="--c:#00c8ff">
+          <div class="ev-depth">− 200m</div><h3>Robowars</h3>
+          <p>Combat robots clash in a bulletproof arena. International zonals across 5 countries.</p>
+          <div class="ev-bot"><span class="ev-tag">ROBOTICS</span><span class="ev-prize">₹5,00,000</span></div>
+        </div>
+        <div class="ev-card reveal" style="--c:#00ffcc">
+          <div class="ev-depth">− 400m</div><h3>AI-Quest</h3>
+          <p>Train and deploy intelligent agents against real-world problem sets at scale.</p>
+          <div class="ev-bot"><span class="ev-tag">AI / ML</span><span class="ev-prize">₹3,00,000</span></div>
+        </div>
+        <div class="ev-card reveal" style="--c:#4fc3f7">
+          <div class="ev-depth">− 600m</div><h3>AUV Challenge</h3>
+          <p>Autonomous underwater vehicles navigate, map and complete deep missions.</p>
+          <div class="ev-bot"><span class="ev-tag">AQUATICS</span><span class="ev-prize">₹1,50,000</span></div>
+        </div>
+        <div class="ev-card reveal" style="--c:#00c8ff">
+          <div class="ev-depth">− 800m</div><h3>Drone Challenge</h3>
+          <p>Boeing Aeromodelling and autonomous drone racing at precision altitude.</p>
+          <div class="ev-bot"><span class="ev-tag">AEROSPACE</span><span class="ev-prize">₹2,50,000</span></div>
+        </div>
+        <div class="ev-card reveal" style="--c:#00ffcc">
+          <div class="ev-depth">− 1000m</div><h3>Algo Trading</h3>
+          <p>Design bots that trade on live simulated markets — speed meets strategy.</p>
+          <div class="ev-bot"><span class="ev-tag">FINTECH</span><span class="ev-prize">₹5,00,000</span></div>
+        </div>
+        <div class="ev-card reveal" style="--c:#4fc3f7">
+          <div class="ev-depth">− 1200m</div><h3>CodeStorm</h3>
+          <p>36-hour International Coding Championship. The deepest code dive.</p>
+          <div class="ev-bot"><span class="ev-tag">CODING</span><span class="ev-prize">₹2,00,000</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline" class="section timeline-section">
+    <div class="sec-inner">
+      <p class="sec-eyebrow reveal" style="text-align:center;">SPECTACLE BLUEPRINTS</p>
+      <h2 class="sec-h2 reveal" style="text-align:center;font-size:clamp(2.2rem,6vw,4rem);">FESTIVAL TIMELINE</h2>
+      <p class="sec-desc reveal" style="text-align:center;max-width:600px;margin:0 auto 3.5rem;">
+        Track the chronology of competitive tournaments, inaugurations, lectures,
+        and prize pool distribution protocols over three action-packed days.
+      </p>
+      <div class="timeline-track">
+        <div class="tl-day reveal">
+          <div class="tl-day-header">
+            <div class="tl-day-badge">DAY 01</div>
+            <div class="tl-day-date">22 DEC 2026</div>
+          </div>
+          <div class="tl-events">
+            <div class="tl-event"><div class="tl-time">09:00 AM</div><div class="tl-dot"></div><div class="tl-content"><h4>Grand Inauguration</h4><p>Opening ceremony with keynote addresses from ISRO Chairman and industry leaders.</p></div></div>
+            <div class="tl-event"><div class="tl-time">11:30 AM</div><div class="tl-dot"></div><div class="tl-content"><h4>Robowars — Round 1</h4><p>Combat bots enter the arena. Qualifying rounds across 3 parallel battle boxes.</p></div></div>
+            <div class="tl-event"><div class="tl-time">02:00 PM</div><div class="tl-dot"></div><div class="tl-content"><h4>AI-Quest Kickoff</h4><p>Problem statements released. 36-hour hackathon window opens.</p></div></div>
+            <div class="tl-event"><div class="tl-time">05:00 PM</div><div class="tl-dot"></div><div class="tl-content"><h4>Workshop: AI & ML</h4><p>Expert session by Amazon engineers — model training and deployment.</p></div></div>
+          </div>
+        </div>
+        <div class="tl-day reveal">
+          <div class="tl-day-header">
+            <div class="tl-day-badge" style="background:rgba(168,85,247,0.15);border-color:rgba(168,85,247,0.4);color:#a855f7;">DAY 02</div>
+            <div class="tl-day-date">23 DEC 2026</div>
+          </div>
+          <div class="tl-events">
+            <div class="tl-event"><div class="tl-time">10:00 AM</div><div class="tl-dot" style="background:#a855f7;box-shadow:0 0 8px #a855f755;"></div><div class="tl-content"><h4>Drone Racing Finals</h4><p>Top-8 drones compete in precision speed circuit. Boeing-partnered event.</p></div></div>
+            <div class="tl-event"><div class="tl-time">12:00 PM</div><div class="tl-dot" style="background:#a855f7;box-shadow:0 0 8px #a855f755;"></div><div class="tl-content"><h4>Keynote: Dr. V. Narayanan, ISRO</h4><p>Deep-space telemetry and the future of India's space programme.</p></div></div>
+            <div class="tl-event"><div class="tl-time">03:00 PM</div><div class="tl-dot" style="background:#a855f7;box-shadow:0 0 8px #a855f755;"></div><div class="tl-content"><h4>AUV Challenge — Live Run</h4><p>Autonomous underwater vehicles complete timed navigation missions.</p></div></div>
+            <div class="tl-event"><div class="tl-time">07:00 PM</div><div class="tl-dot" style="background:#a855f7;box-shadow:0 0 8px #a855f755;"></div><div class="tl-content"><h4>Cultural Night & Exhibition</h4><p>Technology exhibition, robotics showcase, and interactive installations.</p></div></div>
+          </div>
+        </div>
+        <div class="tl-day reveal">
+          <div class="tl-day-header">
+            <div class="tl-day-badge" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.4);color:#10b981;">DAY 03</div>
+            <div class="tl-day-date">24 DEC 2026</div>
+          </div>
+          <div class="tl-events">
+            <div class="tl-event"><div class="tl-time">10:00 AM</div><div class="tl-dot" style="background:#10b981;box-shadow:0 0 8px #10b98155;"></div><div class="tl-content"><h4>CodeStorm Final Submissions</h4><p>36-hour window closes. Jury evaluation of top 10 solutions begins.</p></div></div>
+            <div class="tl-event"><div class="tl-time">01:00 PM</div><div class="tl-dot" style="background:#10b981;box-shadow:0 0 8px #10b98155;"></div><div class="tl-content"><h4>Robowars Grand Final</h4><p>The last two bots standing compete for the ₹5,00,000 championship title.</p></div></div>
+            <div class="tl-event"><div class="tl-time">04:00 PM</div><div class="tl-dot" style="background:#10b981;box-shadow:0 0 8px #10b98155;"></div><div class="tl-content"><h4>Prize Pool Distribution</h4><p>₹1 Crore+ distributed across all event categories. Certificate ceremony.</p></div></div>
+            <div class="tl-event"><div class="tl-time">06:00 PM</div><div class="tl-dot" style="background:#10b981;box-shadow:0 0 8px #10b98155;"></div><div class="tl-content"><h4>Valedictory Ceremony</h4><p>Closing address, Techfest 2027 announcement, and farewell.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKSHOPS -->
+  <section id="workshops" class="section workshops-section">
+    <div class="sec-inner">
+      <p class="sec-eyebrow reveal">ZONE_02 // WORKSHOPS</p>
+      <h2 class="sec-h2 reveal">Pressure <em>Training</em></h2>
+      <p class="sec-desc reveal">IIT Bombay certified sessions from Amazon, Google, BSE, and DRDO experts.</p>
+      <div class="ws-list">
+        <div class="ws-item reveal"><span class="ws-index">01</span><div class="ws-body"><h3>Artificial Intelligence & Machine Learning</h3><p>Build and deploy real ML models. Expert sessions from Amazon and Google engineers.</p></div><div class="ws-cert">IIT Bombay Certificate</div></div>
+        <div class="ws-item reveal"><span class="ws-index">02</span><div class="ws-body"><h3>Cybersecurity & Ethical Hacking</h3><p>Network defense, CTF challenges, and live penetration testing labs.</p></div><div class="ws-cert">IIT Bombay Certificate</div></div>
+        <div class="ws-item reveal"><span class="ws-index">03</span><div class="ws-body"><h3>Robotics & IoT Systems</h3><p>Bot building, embedded programming, and sensor fusion — breadboard to battlefield.</p></div><div class="ws-cert">IIT Bombay Certificate</div></div>
+        <div class="ws-item reveal"><span class="ws-index">04</span><div class="ws-body"><h3>Algorithmic Trading & FinTech</h3><p>BSE-partnered. Financial modelling and live trading simulation.</p></div><div class="ws-cert">IIT Bombay Certificate</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPEAKERS -->
+  <section id="speakers" class="section speakers-section">
+    <div class="sec-inner">
+      <p class="sec-eyebrow reveal">ZONE_03 // KEYNOTES</p>
+      <h2 class="sec-h2 reveal">Voices from <em>Above</em></h2>
+      <div class="sp-grid">
+        <div class="sp-card reveal"><div class="sp-sonar"></div><div class="sp-init">NM</div><h3>N. R. Narayana Murthy</h3><p>Founder, Infosys</p></div>
+        <div class="sp-card reveal"><div class="sp-sonar"></div><div class="sp-init">VN</div><h3>Dr. V. Narayanan</h3><p>Chairman, ISRO</p></div>
+        <div class="sp-card reveal"><div class="sp-sonar"></div><div class="sp-init">AC</div><h3>Gen. Anil Chauhan</h3><p>Chief of Defence Staff, India</p></div>
+        <div class="sp-card reveal"><div class="sp-sonar"></div><div class="sp-init">SS</div><h3>Gp. Capt. Shubhanshu Shukla</h3><p>ISRO Astronaut · Space Symposium</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section id="register" class="section register-section">
+    <div class="sec-inner register-inner">
+      <p class="sec-eyebrow">ZONE_04 // REGISTER</p>
+      <h2 class="sec-h2">Take the <em>Plunge</em></h2>
+      <p class="sec-desc" style="margin:8px auto 0;text-align:center;">December 2026 · IIT Bombay · Asia's Largest Tech Festival</p>
+      <div class="reg-form">
+        <input type="text"  class="reg-input" placeholder="Full Name"/>
+        <input type="email" class="reg-input" placeholder="Email Address"/>
+        <input type="text"  class="reg-input" placeholder="College / Organisation"/>
+        <select class="reg-input"><option value="">Select your zone</option><option>Competition Participant</option><option>Workshop Attendee</option><option>General Visitor</option></select>
+        <button class="reg-btn">INITIATE DIVE</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 Techfest, IIT Bombay</span>
+      <span class="footer-tag">BEYOND THE SURFACE</span>
+      <span>techfest.org</span>
+    </div>
+  </footer>
+
+  <button class="music-btn" id="music-btn">
+    <span id="music-icon">♪</span>
+    <span id="music-label">AMBIENCE</span>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
