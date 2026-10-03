@@ -1,6 +1,6 @@
 # Techfest 2026 — Beyond the Surface
 
-Welcome to the official frontend repository for **Techfest 2026**, Asia's largest science and technology festival hosted by **IIT Bombay**. This year's edition, themed *"Beyond the Surface"*, invites pioneering minds into an immersive, deep-ocean digital experience centered around robotics, AI, aerospace, and deep-tech frontiers.
+Welcome to the official frontend repository for **Techfest 2026**, Asia's largest science and technology festival hosted by **IIT Bombay**. This year's edition, themed *"Beyond the Surface"*,  invites pioneering minds into an immersive, deep-ocean digital experience centered around robotics, AI, aerospace, and deep-tech frontiers.
 
 ## 🔗 Project Links
 * **GitHub Repository:** [VaishnaviKadwad/techfest-3d-26](https://github.com/VaishnaviKadwad/techfest-3d-26)
