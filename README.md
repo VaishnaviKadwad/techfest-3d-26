@@ -42,3 +42,4 @@ You only need a modern web browser (Chrome, Firefox, Edge, or Safari) with WebGL
 1. Clone the repository to your desktop machine:
    ```bash
    git clone [https://github.com/VaishnaviKadwad/techfest-3d-26.git](https://github.com/VaishnaviKadwad/techfest-3d-26.git)
+<!-- Badge trigger test -->
